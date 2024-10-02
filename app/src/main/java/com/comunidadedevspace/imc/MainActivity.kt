@@ -1,5 +1,7 @@
 package com.comunidadedevspace.imc
 
+import android.content.Intent
+import android.content.IntentSender.SendIntentException
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -21,23 +23,27 @@ class MainActivity : AppCompatActivity() {
             val pesoStr: String = edtPeso.text.toString()
             val alturaStr: String = edtAltura.text.toString()
 
-           if (pesoStr == "" || alturaStr == "") {
+            if (pesoStr == "" || alturaStr == "") {
 
-               Snackbar.make(
-                   edtPeso,
-                   "Preencha todos os campos!",
-                   Snackbar.LENGTH_LONG
-               ).show()
+                Snackbar.make(
+                    edtPeso,
+                    "Preencha todos os campos!",
+                    Snackbar.LENGTH_LONG
+                ).show()
 
-           } else {
-               val peso = pesoStr.toFloat()
-               val altura = alturaStr.toFloat()
+            } else {
+                val peso = pesoStr.toFloat()
+                val altura = alturaStr.toFloat()
 
-               val alturaq2 = altura * altura
-               val resultado = peso / alturaq2
+                val alturaq2 = altura * altura
+                val resultado = peso / alturaq2
 
-               println(resultado)
-           }
+                val intent = Intent(this, Resultctivity::class.java)
+                intent.putExtra("KEY_RESULT_IMC", resultado)
+                startActivity(intent)
+
+                println(resultado)
+            }
 
         }
 
